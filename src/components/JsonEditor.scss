@@ -1,0 +1,25 @@
+@use "../styles/variables" as *;
+
+.editor {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  border: none;
+  resize: none;
+  padding: $spacing-md;
+  font: inherit;
+  font-size: $font-size-code;
+  line-height: 1.55;
+  color: var(--ink);
+  background: transparent;
+  overflow: auto;
+
+  &:focus {
+    outline: none;
+    background: #fffdf8;
+  }
+
+  &::placeholder {
+    color: var(--ink-soft);
+  }
+}

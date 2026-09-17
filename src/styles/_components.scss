@@ -1,0 +1,30 @@
+@use "./variables" as *;
+
+%output-copy-button {
+  border: $border-width solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.75rem;
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  align-self: flex-start;
+  margin: $spacing-sm;
+  flex-shrink: 0;
+  transition: border-color 0.12s ease;
+
+  &:hover {
+    border-color: var(--ink-soft);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ts-accent);
+    outline-offset: 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  %output-copy-button {
+    transition: none;
+  }
+}

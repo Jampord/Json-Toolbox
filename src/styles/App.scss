@@ -1,0 +1,186 @@
+@use "./variables" as *;
+@use "./components" as *;
+
+:root {
+  --ink: #1c1b1a;
+  --ink-soft: #6b6660;
+  --paper: #faf9f6;
+  --panel: #ffffff;
+  --rule: #ddd9d1;
+  --json-accent: #b5762c;
+  --ts-accent: #2f5fa8;
+  --error: #b23b3b;
+  --success: #3c7a4f;
+  --panel-height: 320px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", Consolas, monospace;
+}
+
+.app {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+
+  @media (max-width: 720px) {
+    padding: 0.75rem;
+  }
+}
+
+.app-header {
+  padding-bottom: $spacing-md;
+  margin-bottom: $spacing-md;
+  border-bottom: $border-width solid var(--rule);
+}
+
+.app-header__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+.app-header__subtitle {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+// Shared panel chrome, used by both halves of editor-panels
+// and by the typescript-panel below it.
+%panel-chrome {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--panel);
+  border: $border-width solid var(--rule);
+}
+
+.panel__title {
+  margin: 0;
+  padding: $spacing-sm $spacing-md;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  border-bottom: $border-width solid var(--rule);
+  flex-shrink: 0;
+}
+
+.editor-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-md;
+  margin-bottom: $spacing-md;
+
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.json-input-panel {
+  @extend %panel-chrome;
+  min-width: 0;
+  border-left: $accent-border-width solid var(--json-accent);
+}
+
+.json-output-panel {
+  @extend %panel-chrome;
+  min-width: 0;
+  border-left: $accent-border-width solid var(--json-accent);
+  position: relative;
+}
+
+.json-output-panel-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.json-output__copy {
+  @extend %output-copy-button;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .output__copy {
+    transition: none;
+  }
+}
+
+.json-output {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  margin: 0;
+  padding: $spacing-md;
+  overflow: auto;
+}
+
+.typescript-panel {
+  @extend %panel-chrome;
+  height: var(--panel-height);
+  border-left: $accent-border-width solid var(--ts-accent);
+  margin-bottom: $spacing-md;
+}
+
+.stale-notice {
+  margin: 0;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.75rem;
+  color: var(--error);
+  background: #fbf1ee;
+  border-top: 1px solid var(--rule);
+  flex-shrink: 0;
+}
+
+.toolbar-section {
+  margin-bottom: 0.75rem;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: var(--panel);
+  border: $border-width solid var(--rule);
+}
+.toolbar__button {
+  border: $border-width solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 0.45rem 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.12s ease;
+
+  &:hover {
+    border-color: var(--ink-soft);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ts-accent);
+    outline-offset: 1px;
+  }
+
+  &--primary {
+    border-color: var(--ts-accent);
+    color: var(--ts-accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toolbar__button {
+    transition: none;
+  }
+}

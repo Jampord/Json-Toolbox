@@ -1,0 +1,19 @@
+@use "../styles/variables" as *;
+
+.status {
+  margin: 0;
+  padding: $spacing-sm $spacing-md;
+  font-size: 0.8rem;
+  border: $border-width solid var(--rule);
+  border-left-width: $accent-border-width;
+
+  &--success {
+    color: var(--success);
+    border-left-color: var(--success);
+  }
+
+  &--error {
+    color: var(--error);
+    border-left-color: var(--error);
+  }
+}

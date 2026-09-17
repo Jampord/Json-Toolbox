@@ -1,0 +1,41 @@
+@use "../styles/variables" as *;
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: var(--panel);
+  border: $border-width solid var(--rule);
+}
+
+.toolbar__button {
+  border: $border-width solid var(--rule);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 0.45rem 0.85rem;
+  cursor: pointer;
+  transition: border-color 0.12s ease;
+
+  &:hover {
+    border-color: var(--ink-soft);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--ts-accent);
+    outline-offset: 1px;
+  }
+
+  &--primary {
+    border-color: var(--ts-accent);
+    color: var(--ts-accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toolbar__button {
+    transition: none;
+  }
+}
